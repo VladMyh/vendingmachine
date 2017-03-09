@@ -4,17 +4,17 @@ package app.model.beverage;
  * Abstract class to represent a beverage
  */
 public abstract class Beverage {
-    private Float price;
+    private Integer price;
 
-    public Beverage(Float price) {
+    public Beverage(Integer price) {
         this.price = price;
     }
 
-    public Float getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }

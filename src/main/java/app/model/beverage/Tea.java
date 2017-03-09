@@ -1,7 +1,7 @@
 package app.model.beverage;
 
 public class Tea extends Beverage {
-    public Tea(Float price) {
+    public Tea(Integer price) {
         super(price);
     }
 }

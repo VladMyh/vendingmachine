@@ -7,9 +7,9 @@ import app.model.beverage.Tea;
  */
 public class TeaBuilder {
 
-    private Float price;
+    private Integer price;
 
-    public TeaBuilder price(Float price) {
+    public TeaBuilder price(Integer price) {
         this.price = price;
         return this;
     }
