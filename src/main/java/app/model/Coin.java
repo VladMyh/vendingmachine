@@ -4,11 +4,11 @@ package app.model;
  * This enum represents values of coins accepted by the vending machine
  */
 public enum Coin {
-    One(1),
-    Five(5),
+    Fifty(50),
+    TwentyFive(25),
     Ten(10),
-    TwntyFive(25),
-    Fifty(50);
+    Five(5),
+    One(1);
 
     private int value;
 
