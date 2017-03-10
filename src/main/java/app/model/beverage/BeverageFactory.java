@@ -10,13 +10,13 @@ public class BeverageFactory {
 
         switch (type) {
             case Coffee:
-                beverage = new Coffee();
+                beverage = new Coffee(BeverageType.Coffee.getPrice());
                 break;
             case Tea:
-                beverage = new Tea();
+                beverage = new Tea(BeverageType.Tea.getPrice());
                 break;
             case Juice:
-                beverage = new Juice();
+                beverage = new Juice(BeverageType.Juice.getPrice());
                 break;
         }
 

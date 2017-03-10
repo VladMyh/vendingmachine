@@ -4,7 +4,17 @@ package app.model.beverage;
  * Enum to represent beverage type
  */
 public enum BeverageType {
-    Coffee,
-    Tea,
-    Juice
+    Coffee(35),
+    Tea(25),
+    Juice(45);
+
+    private Integer price;
+
+    BeverageType(Integer price){
+        this.price = price;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
 }
