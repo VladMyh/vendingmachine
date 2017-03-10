@@ -1,4 +1,4 @@
-package app.pos;
+package app.controller;
 
 import app.model.Coin;
 import app.util.Tuple;
@@ -15,8 +15,6 @@ public class CoinManager {
         List<Coin> result = new LinkedList<>();
 
         for (Coin c : Coin.values()) {
-            System.out.println("coin: " + c.toString());
-
             Tuple<List<Coin>, Integer> res = checkNominal(c, remainder);
             result.addAll(res.getFirst());
             remainder = res.getSecond();
