@@ -1,83 +1,54 @@
 package app.controller;
 
+
 import app.model.Coin;
-import app.model.beverage.Beverage;
-import app.model.beverage.BeverageFactory;
-import app.model.beverage.BeverageType;
+import app.model.Beverage;
+import app.model.BeverageType;
 import app.util.Tuple;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
-public class VendingMachineController implements VendingMachine {
+public interface VendingMachineController {
+    /**
+     * This method adds a coin into vending machine.
+     *
+     * @param coin A coin to add.
+     */
+    void putChange(Coin coin);
 
-    private BeverageFactory beverageFactory;
+    /**
+     * This method is used to select a beverage type.
+     *
+     * @param type Selected beverage type.
+     */
+    void selectBeverageType(BeverageType type);
 
-    private CoinManager coinManager;
+    /**
+     * This method is used to cancel order.
+     *
+     * @return List of coins.
+     */
+    void cancelOrder();
 
-    private List<Coin> currentOrderChange;
+    /**
+     * This method returns current change.
+     *
+     * @return A list of change.
+     */
+    List<Coin> returnChange();
 
-    private BeverageType selectedBeverageType;
+    /**
+     * This method confirms and executes order.
+     *
+     * @return A tuple containing beverage as it's first element,
+     *         and a list of spare change.
+     */
+    Tuple<Beverage, List<Coin>> confirmOrder();
 
-    public VendingMachineController(BeverageFactory beverageFactory,
-                                    CoinManager coinManager) {
-        this.beverageFactory = beverageFactory;
-        this.coinManager = coinManager;
-
-        this.currentOrderChange = new LinkedList<>();
-    }
-
-    public void putChange(Coin change) {
-        currentOrderChange.add(change);
-    }
-
-    public void selectBeverageType(BeverageType type) {
-        selectedBeverageType = type;
-    }
-
-    public List<Coin> cancelOrder() {
-        List<Coin> result = currentOrderChange;
-
-        clear();
-
-        return result;
-    }
-
-    public Tuple<Beverage, List<Coin>> confirmOrder() {
-        if(!currentOrderChange.isEmpty() && selectedBeverageType != null) {
-            Optional<Integer> total = checkPrice(selectedBeverageType, currentOrderChange);
-
-            if(total.isPresent()) {
-                Beverage beverage = beverageFactory.makeBeverage(selectedBeverageType);
-
-                List<Coin> remainder = coinManager.getChangeRemainder(total.get(),
-                        selectedBeverageType.getPrice());
-
-                clear();
-
-                return new Tuple<>(beverage, remainder);
-            }
-        }
-
-        return null;
-    }
-
-    private Optional<Integer> checkPrice(BeverageType type, List<Coin> change) {
-        Integer total = change
-                .stream()
-                .mapToInt(Coin::getValue)
-                .sum();
-
-        if(total >= type.getPrice()) {
-            return Optional.of(total);
-        }
-
-        return Optional.empty();
-    }
-
-    private void clear() {
-        currentOrderChange.clear();
-        selectedBeverageType = null;
-    }
+    /**
+     * This method returns current total value of coins.
+     *
+     * @return Total value of coins.
+     */
+    Integer currentTotal();
 }
