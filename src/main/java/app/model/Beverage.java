@@ -1,4 +1,4 @@
-package app.model.beverage;
+package app.model;
 
 /**
  * Abstract class to represent a beverage

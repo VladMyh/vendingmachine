@@ -1,4 +1,4 @@
-package app.model.beverage;
+package app.model;
 
 /**
  * Beverage factory to construct beverages.
